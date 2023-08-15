@@ -47,6 +47,7 @@ app.delete('/api/products/:_id', (req, res) => {
 });
 
 app.put('/api/products/:_id', (req, res) => {
+    console.log("hello");
     const productId = req.params._id;
     const updatedProduct = req.body;
    db.updateprod(productId, updatedProduct)
