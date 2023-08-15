@@ -38,7 +38,7 @@ app.delete('/api/products/:_id', (req, res) => {
     const productId = req.params._id;
    db.deleteprod(productId)
         .then((result) => {
-            res.status(204).send("product deleted"); 
+            res.status(202).send("product deleted"); 
         })
         .catch((error) => {
             console.log(error);
@@ -59,7 +59,26 @@ app.put('/api/products/:_id', (req, res) => {
         });
 });
 
+app.post('/api/user/add',(req,res)=>{
+    db.addUSer(req.body).then((result)=>{
+        res.status(200).json(result)
+    }).catch((err)=>{res.status(200).json(err)})
+})
+app.post('/api/login',(req,res)=>{
+    db.getUser(req.body.email).then((result)=>{
+        if(result){
+            if(result.password===req.body.password){
+                res.json("success")
+            }else{
+                res.json("the password is incorrect")
+            }
 
+
+        }else{
+            res.json("no record exist ")
+        }
+    }).catch((err)=> res.status(500).json)
+})
 
 app.listen(port, ()=>{
 console.log(`listening on ${port}`);

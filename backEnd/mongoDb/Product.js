@@ -13,8 +13,17 @@ const productSchema = new mongoose.Schema({
       default: "CLASS"
     }
   });
-  
+const userSchema = new mongoose.Schema ({
+  username:String,
+  email :String,
+  password:String 
+
+
+
+})  
+const Users =mongoose.model("Users",userSchema) ;
 const Product = mongoose.model("Product", productSchema);
 
 
-module.exports.Product = Product;
+module.exports = {Product,Users}
+;
